@@ -44,11 +44,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
-      <p class="stat">61.16</p>
+      <p class="stat">71.48</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">36</p>
+      <p class="stat">46</p>
     </div>
   </div>
   <div class="row historical">
@@ -62,11 +62,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
-      <p class="stat">20.27</p>
+      <p class="stat">19.68</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
-      <p class="stat">0.35</p>
+      <p class="stat">0.37</p>
     </div>
   </div>
 </div>
@@ -101,29 +101,39 @@ function drawBlock( x, y ) {
 }
 
 // draws the board and the moving shape
-function render() {
-    ctx.clearRect( 0, 0, W, H );
-
+function renderBoard() {
     ctx.strokeStyle = &#039;black&#039;;
-    for ( var x = 0; x &lt; COLS; ++x ) {
-        for ( var y = 0; y &lt; ROWS; ++y ) {
-            if ( board[ y ][ x ] ) {
-                ctx.fillStyle = colors[ board[ y ][ x ] - 1 ];
-                drawBlock( x, y );
+    for (var x = 0; x &lt; COLS; ++x) {
+        for (var y = 0; y &lt; ROWS; ++y) {
+            if (board[y][x]) {
+                ctx.fillStyle = colors[board[y][x] - 1];
+                drawBlock(x, y);
             }
         }
     }
+}
 
+function renderCurrentPiece() {
     ctx.fillStyle = &#039;red&#039;;
     ctx.strokeStyle = &#039;black&#039;;
-    for ( var y = 0; y &lt; 4; ++y ) {
-        for ( var x = 0; x &lt; 4; ++x ) {
-            if ( current[ y ][ x ] ) {
-                ctx.fillStyle = colors[ current[ y ][ x ] - 1 ];
-                drawBlock( currentX + x, currentY + y );
+    for (var y = 0; y &lt; 4; ++y) {
+        for (var x = 0; x &lt; 4; ++x) {
+            if (current[y][x]) {
+                ctx.fillStyle = colors[current[y][x] - 1];
+                drawBlock(currentX + x, currentY + y);
             }
         }
     }
+}
+
+function clearCanvas() {
+    ctx.clearRect(0, 0, W, H);
+}
+
+function render() {
+    clearCanvas();
+    renderBoard();
+    renderCurrentPiece();
 }</textarea>
   </div>
 </div>
